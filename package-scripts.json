@@ -1,0 +1,112 @@
+{
+  "name": "saas-app",
+  "version": "1.0.0",
+  "description": "Modern SaaS application with comprehensive database management",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm run db:setup",
+    
+    "dev": "npm run db:ensure && next dev",
+    "build": "npm run db:migrate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    
+    "db:setup": "npm run db:create && npm run db:migrate && npm run db:seed",
+    "db:ensure": "npm run db:create || true && npm run db:migrate",
+    "db:create": "node scripts/create-database.js",
+    "db:migrate": "drizzle-kit push:mysql",
+    "db:generate": "drizzle-kit generate:mysql",
+    "db:migrate:dev": "drizzle-kit push:mysql --config=drizzle.dev.config.ts",
+    "db:migrate:prod": "drizzle-kit push:mysql --config=drizzle.prod.config.ts",
+    "db:studio": "drizzle-kit studio",
+    "db:drop": "node scripts/drop-database.js",
+    "db:reset": "npm run db:drop && npm run db:setup",
+    "db:seed": "node scripts/seed-database.js",
+    "db:seed:dev": "NODE_ENV=development npm run db:seed",
+    "db:seed:prod": "NODE_ENV=production npm run db:seed",
+    
+    "db:backup": "node scripts/backup-database.js",
+    "db:backup:auto": "node scripts/backup-database.js --auto",
+    "db:restore": "node scripts/restore-database.js",
+    "db:restore:latest": "node scripts/restore-database.js --latest",
+    
+    "db:export": "node scripts/export-data.js",
+    "db:export:csv": "node scripts/export-data.js --format=csv",
+    "db:export:json": "node scripts/export-data.js --format=json",
+    "db:import": "node scripts/import-data.js",
+    "db:import:csv": "node scripts/import-data.js --format=csv",
+    "db:import:json": "node scripts/import-data.js --format=json",
+    
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:api": "npm run db:ensure && jest --testPathPattern=api",
+    "test:db": "npm run db:ensure && jest --testPathPattern=database",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    
+    "health": "node scripts/health-check.js",
+    "health:db": "node scripts/health-check.js --db-only",
+    "health:api": "node scripts/health-check.js --api-only",
+    "health:full": "node scripts/health-check.js --full",
+    
+    "logs": "pm2 logs",
+    "logs:error": "pm2 logs --err",
+    "logs:db": "node scripts/view-db-logs.js",
+    
+    "analyze": "ANALYZE=true npm run build",
+    "clean": "rm -rf .next out dist coverage",
+    "clean:all": "npm run clean && rm -rf node_modules && npm install",
+    "clean:db": "npm run db:drop && npm run clean",
+    
+    "preview": "npm run build && npm run start",
+    "deploy:staging": "npm run test && npm run build && npm run deploy:staging:run",
+    "deploy:production": "npm run test && npm run build && npm run deploy:production:run",
+    "deploy:staging:run": "node scripts/deploy-staging.js",
+    "deploy:production:run": "node scripts/deploy-production.js"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "drizzle-orm": "^0.28.0",
+    "mysql2": "^3.6.0",
+    "@auth/drizzle-adapter": "^0.3.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.19.0",
+    "jest": "^29.0.0",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/jest-dom": "^5.0.0",
+    "playwright": "^1.38.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0",
+    "@next/bundle-analyzer": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/saas-app.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "saas",
+    "database",
+    "typescript",
+    "drizzle"
+  ],
+  "author": "Your Team <team@yourapp.com>",
+  "homepage": "https://yourapp.com",
+  "bugs": {
+    "url": "https://github.com/your-org/saas-app/issues"
+  }
+}

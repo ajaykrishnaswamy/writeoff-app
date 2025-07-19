@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-primary-blue: #4F46E5;
+  --color-dark-blue: #3B4B66;
+  --color-light-gray: #F8F9FB;
+  --color-white: #FFFFFF;
+  --color-dark-gray: #1F2937;
+  --color-medium-gray: #6B7280;
+  --color-light-blue: #EFF6FF;
+  --color-yellow: #FCD34D;
+
+  --font-sans: 'Inter', sans-serif;
+
+  --text-hero-h1: 48px;
+  --text-section-h2: 32px;
+  --text-cards-h3: 20px;
+  --text-body: 16px;
+  --text-sm: 14px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --radius-card: 8px;
+  --radius-button: 6px;
+
+  --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  html, body {
+    font-family: var(--font-sans);
+    color: var(--color-dark-gray);
+    background-color: var(--color-white);
+    line-height: normal;
+  }
+
+  h1 {
+    font-size: var(--text-hero-h1);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark-gray);
+  }
+
+  h2 {
+    font-size: var(--text-section-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark-gray);
+  }
+
+  h3 {
+    font-size: var(--text-cards-h3);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-dark-gray);
+  }
+
+  p {
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-medium-gray);
+  }
+
+  small {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-medium-gray);
+  }
+
+  a {
+    color: var(--color-primary-blue);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
